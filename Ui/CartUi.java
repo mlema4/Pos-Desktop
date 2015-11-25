@@ -68,7 +68,7 @@ public class CartUi extends JFrame implements Observer {
 				int ProductId = Integer.parseInt(txtId.getText());
 				int qty = Integer.parseInt(txtQty.getText());
 				//cart.addProduct(new Product(1, "hello product", "test", 20), qty);
-				cart.addProduct(ProductId,qty);
+			//	cart.addProduct(ProductId,qty);
 			}
 		};
 	}
