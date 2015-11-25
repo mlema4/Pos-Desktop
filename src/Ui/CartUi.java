@@ -20,11 +20,13 @@ public class CartUi extends JFrame implements Observer {
 	protected ShoppingCart cart;
 	protected JTextField txtId, txtQty, txtTotal;
 	protected JButton btnAdd;
+	private Controller controller;
 
-	public CartUi(ShoppingCart cart) {
+	public CartUi(Controller controller) {
 		super("Shop ui");
 		this.setVisible(true);
-		this.cart = cart;
+		this.controller = controller;
+		this.cart = controller.createCart(null);
 		this.cart.addObserver(this);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setBounds(200, 200, 500, 250);
@@ -65,10 +67,10 @@ public class CartUi extends JFrame implements Observer {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int ProductId = Integer.parseInt(txtId.getText());
+				int productId = Integer.parseInt(txtId.getText());
 				int qty = Integer.parseInt(txtQty.getText());
-				//cart.addProduct(new Product(1, "hello product", "test", 20), qty);
-			//	cart.addProduct(ProductId,qty);
+				Product product = controller.getProduct(productId);
+				cart.addProduct(product, qty);
 			}
 		};
 	}

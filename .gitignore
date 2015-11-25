@@ -7,3 +7,4 @@
 .settings
 
 /build/
+/config.env
