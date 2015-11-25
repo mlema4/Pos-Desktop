@@ -13,21 +13,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import domain.ShoppingCart;
-import domain.product.Product;
-
 public class CartUi extends JFrame implements Observer {
-	protected ShoppingCart cart;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected JTextField txtId, txtQty, txtTotal;
 	protected JButton btnAdd;
-	private Controller controller;
+	protected Controller controller;
+
+	protected int currentCartId;
 
 	public CartUi(Controller controller) {
 		super("Shop ui");
-		this.setVisible(true);
 		this.controller = controller;
-		this.cart = controller.createCart(null);
-		this.cart.addObserver(this);
+
+		this.currentCartId = controller.createCart(null);
+		this.controller.addCartObserver(this.currentCartId, this);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setBounds(200, 200, 500, 250);
 
@@ -63,21 +65,25 @@ public class CartUi extends JFrame implements Observer {
 
 	}
 
+	public void launch() {
+		this.setVisible(true);
+	}
+
 	private ActionListener addToCartClick() {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int productId = Integer.parseInt(txtId.getText());
 				int qty = Integer.parseInt(txtQty.getText());
-				Product product = controller.getProduct(productId);
-				cart.addProduct(product, qty);
+
+				controller.addProductToCart(currentCartId, productId, qty);
 			}
 		};
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		this.txtTotal.setText(String.valueOf(this.cart.getTotalPrice()));
+		this.txtTotal.setText(String.valueOf(controller.getTotalAmountFromCart(this.currentCartId)));
 
 	}
 
