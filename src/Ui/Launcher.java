@@ -4,8 +4,9 @@ public class Launcher {
 
 	public static void main(String[] args) {
 		Controller controller = new Controller();
-		CartUi ui = new CartUi(controller);
-		ui.launch();
+		PosUi ui = new PosUi(controller);
 		
+		ui.launch();
+
 	}
 }
