@@ -1,7 +1,6 @@
 package Ui;
 
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -43,18 +42,17 @@ public class CashierUI extends JFrame implements Observer {
 		// creating panels
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 3, 3));
-		//panel.setLayout(new GridLayout(1, 2));
 		JPanel itemsPanel = new JPanel();
-		//itemsPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 3, 3));
 
 		//creating table components
 		String[] columns = { "Id", "Name", "Price", "Qty", "Total" };
 		String[][] datas = { { "1", "2", "3", "4", "5" } };
-		itemsModel = new DefaultTableModel(columns, 0);
+		itemsModel = new PosTableModel();
 		//creating table and scrollPane
 		JTable items = new JTable(datas, columns);
 		items.setModel(itemsModel);
 		JScrollPane pane = new JScrollPane(items);
+		itemsModel.addTableModelListener(new PosTableModelListener(cartId, controller));
 		
 		//creating labels, buttons and text fields
 		JLabel lblQty = new JLabel("Qty");

@@ -7,6 +7,7 @@ import java.util.Observer;
 import java.util.Properties;
 
 import db.WebshopFacade;
+import domain.ShoppingCart;
 import domain.product.Product;
 import domain.product.ShoppingCartProduct;
 
@@ -64,5 +65,15 @@ public class Controller {
 		int cartId = createCart(null);
 		new CashierUI(this, cartId).launch();;
 		new CustomerUI(this, cartId).launch();;
+	}
+
+	public void alterQuantity(int cartId, int productIndex, int newQuantity) {
+		ShoppingCart cart = webshop.getCart(cartId);
+		cart.alterProduct(productIndex, newQuantity);
+	}
+
+	public void updateCart(int cartId) {
+		ShoppingCart cart = webshop.getCart(cartId);
+		cart.reportChanges();
 	}
 }
