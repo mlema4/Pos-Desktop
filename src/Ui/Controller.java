@@ -59,4 +59,10 @@ public class Controller {
 	public List<ShoppingCartProduct> getCartProducts(int cartId){
 		return this.webshop.getCart(cartId).getProducts();
 	}
+
+	public void initUI() {
+		int cartId = createCart(null);
+		new CashierUI(this, cartId).launch();;
+		new CustomerUI(this, cartId).launch();;
+	}
 }

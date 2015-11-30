@@ -20,12 +20,12 @@ import javax.swing.table.DefaultTableModel;
 
 import domain.product.ShoppingCartProduct;
 
-public class PosUi extends JFrame implements Observer {
+public class CashierUI extends JFrame implements Observer {
 
-	public PosUi(Controller controller) {
+	public CashierUI(Controller controller, int cartId) {
 		super("POS System");
 		this.controller = controller;
-		cartId = controller.createCart("1");
+		this.cartId = cartId;
 		controller.addCartObserver(cartId, this);
 		this.initComponents();
 	}
