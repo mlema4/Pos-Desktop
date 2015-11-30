@@ -39,7 +39,11 @@ public class Controller {
 	}
 
 	public void addProductToCart(int currentCartId, int productId, int qty) {
-		ShoppingCartProduct product = new ShoppingCartProduct(webshop.getProduct(productId), qty);
+		Product p = webshop.getProduct(productId);
+		if (p == null) {
+			throw new IllegalArgumentException("Product not found");
+		}
+		ShoppingCartProduct product = new ShoppingCartProduct(p, qty);
 		webshop.getCart(currentCartId).addProduct(product);
 	}
 
