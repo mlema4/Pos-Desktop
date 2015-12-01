@@ -31,6 +31,10 @@ public class Controller {
 		return properties;
 	}
 
+	private ShoppingCart getCart(int cartId) {
+		return this.webshop.getCart(cartId);
+	}
+
 	public int createCart(String userId) {
 		return webshop.createCart(userId).getId();
 	}
@@ -40,25 +44,23 @@ public class Controller {
 	}
 
 	public void addProductToCart(int currentCartId, int productId, int qty) {
-		Product p = webshop.getProduct(productId);
+		Product p = getProduct(productId);
 		if (p == null) {
 			throw new IllegalArgumentException("Product not found");
 		}
-		ShoppingCartProduct product = new ShoppingCartProduct(p, qty);
-		webshop.getCart(currentCartId).addProduct(product);
+		webshop.addProductToCart(currentCartId, p, qty);
 	}
 
 	public void addCartObserver(int currentCartId, Observer cartUi) {
-		this.webshop.getCart(currentCartId).addObserver(cartUi);
+		getCart(currentCartId).addObserver(cartUi);
 	}
 
 	public Double getTotalAmountFromCart(int currentCartId) {
-		// TODO Auto-generated method stub
-		return this.webshop.getCart(currentCartId).getTotalPrice();
+		return getCart(currentCartId).getTotalPrice();
 	}
 	
 	public List<ShoppingCartProduct> getCartProducts(int cartId){
-		return this.webshop.getCart(cartId).getProducts();
+		return getCart(cartId).getProducts();
 	}
 
 	public void initUI() {
@@ -68,12 +70,12 @@ public class Controller {
 	}
 
 	public void alterQuantity(int cartId, int productIndex, int newQuantity) {
-		ShoppingCart cart = webshop.getCart(cartId);
+		ShoppingCart cart = getCart(cartId);
 		cart.alterProduct(productIndex, newQuantity);
 	}
 
 	public void updateCart(int cartId) {
-		ShoppingCart cart = webshop.getCart(cartId);
+		ShoppingCart cart = getCart(cartId);
 		cart.reportChanges();
 	}
 }
