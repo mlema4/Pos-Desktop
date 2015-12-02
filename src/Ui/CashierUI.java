@@ -29,7 +29,7 @@ public class CashierUI extends JFrame implements Observer {
 		this.initComponents();
 	}
 
-	JTextField txtItemId, txtQty, txtAmount;
+	JTextField txtItemId, txtQty, txtAmount, txtDiscount, txtDiscountApplied;
 	Controller controller;
 	int cartId;
 	protected DefaultTableModel itemsModel;
@@ -45,11 +45,10 @@ public class CashierUI extends JFrame implements Observer {
 		JPanel itemsPanel = new JPanel();
 
 		//creating table components
-		String[] columns = { "Id", "Name", "Price", "Qty", "Total" };
-		String[][] datas = { { "1", "2", "3", "4", "5" } };
-		itemsModel = new PosTableModel();
+		String[] columns = { "Id", "Name", "Price", "Qty", "Total"};
+		itemsModel = new PosTableModel(columns);
 		//creating table and scrollPane
-		JTable items = new JTable(datas, columns);
+		JTable items = new JTable(null, columns);
 		items.setModel(itemsModel);
 		JScrollPane pane = new JScrollPane(items);
 		itemsModel.addTableModelListener(new PosTableModelListener(cartId, controller));
@@ -58,12 +57,18 @@ public class CashierUI extends JFrame implements Observer {
 		JLabel lblQty = new JLabel("Qty");
 		JLabel lblItemId = new JLabel("Product id");
 		JLabel lblAmount = new JLabel("Amount");
-		JButton btnAdd = new JButton("Add to Cart");
-		btnAdd.addActionListener(this.addToCartBtnClick());
+		JLabel lblDiscount = new JLabel("Discount code");
+		JButton btnAddProduct = new JButton("Add to Cart");
+		btnAddProduct.addActionListener(this.addToCartBtnClick());
+		JButton btnAddDiscount = new JButton("Add discount");
+		btnAddDiscount.addActionListener(this.addDiscountBtnClick());
 		txtItemId = new JTextField(5);
 		txtQty = new JTextField(5);
 		txtAmount = new JTextField(5);
 		txtAmount.setEnabled(false);
+		txtDiscount = new JTextField(5);
+		txtDiscountApplied = new JTextField(5);
+		txtDiscountApplied.setEnabled(false);
 		
 		// building frame
 		// add stuff to itemspanel
@@ -73,7 +78,11 @@ public class CashierUI extends JFrame implements Observer {
 		itemsPanel.add(txtQty);
 		itemsPanel.add(lblAmount);
 		itemsPanel.add(txtAmount);
-		itemsPanel.add(btnAdd);
+		itemsPanel.add(btnAddProduct);
+		itemsPanel.add(lblDiscount);
+		itemsPanel.add(txtDiscount);
+		itemsPanel.add(btnAddDiscount);
+		itemsPanel.add(txtDiscountApplied);
 		// populating main JPanel
 		panel.add(pane, 0);
 		panel.add(itemsPanel, 1);
@@ -116,6 +125,16 @@ public class CashierUI extends JFrame implements Observer {
 			}
 		};
 	}
+	
+	protected ActionListener addDiscountBtnClick() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO implement
+			}
+		};
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -132,10 +151,7 @@ public class CashierUI extends JFrame implements Observer {
 					p.getProduct().getName(), p.getProduct().getPrice(),
 					p.getQty(), p.getTotal() });
 		}
-
-		// itemsModal.addRow(new Object[] { "Column 1", "Column 2",
-		// "Column 3"});
-
+		
 		txtAmount.setText(controller.getTotalAmountFromCart(cartId).toString());
 	}
 }
