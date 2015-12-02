@@ -49,7 +49,13 @@ public class CustomerUI extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		txtAmount.setText(controller.getTotalAmountFromCart(cartId).toString());
+		txtAmount.setText(round(controller.getTotalAmountFromCart(cartId)).toString());
+	}
+	
+	private Double round(double val) {
+		val *= 100;
+		val = Math.round(val);
+		return val/100;
 	}
 
 }

@@ -157,6 +157,12 @@ public class CashierUI extends JFrame implements Observer {
 					p.getQty(), p.getTotal() });
 		}
 		
-		txtAmount.setText(controller.getTotalAmountFromCart(cartId).toString());
+		txtAmount.setText(round(controller.getTotalAmountFromCart(cartId)).toString());
+	}
+	
+	private Double round(double val) {
+		val *= 100;
+		val = Math.round(val);
+		return val/100;
 	}
 }
