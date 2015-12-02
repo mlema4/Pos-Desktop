@@ -82,4 +82,8 @@ public class Controller {
 	public void addDiscount(int cartId, String code) {
 		webshop.addDiscountToCart(cartId, code);
 	}
+
+	public String getDiscountCode(int cartId) {
+		return webshop.getDiscountCode(cartId);
+	}
 }

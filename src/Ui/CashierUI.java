@@ -156,8 +156,9 @@ public class CashierUI extends JFrame implements Observer {
 					p.getProduct().getName(), p.getProduct().getPrice(),
 					p.getQty(), p.getTotal() });
 		}
-		
+
 		txtAmount.setText(round(controller.getTotalAmountFromCart(cartId)).toString());
+		txtDiscountApplied.setText(controller.getDiscountCode(cartId));
 	}
 	
 	private Double round(double val) {
