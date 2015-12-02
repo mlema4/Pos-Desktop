@@ -78,4 +78,8 @@ public class Controller {
 		ShoppingCart cart = getCart(cartId);
 		cart.reportChanges();
 	}
+
+	public void addDiscount(int cartId, String code) {
+		webshop.addDiscountToCart(cartId, code);
+	}
 }

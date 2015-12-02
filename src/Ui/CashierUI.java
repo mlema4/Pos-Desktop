@@ -131,7 +131,12 @@ public class CashierUI extends JFrame implements Observer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO implement
+				String code = txtDiscount.getText();
+				try {
+					controller.addDiscount(cartId, code);
+				} catch (Exception exc) {
+					JOptionPane.showMessageDialog(null, exc.getMessage());
+				}
 			}
 		};
 	}
