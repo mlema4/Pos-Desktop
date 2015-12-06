@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Observer;
 import java.util.Properties;
 
-import db.WebshopFacade;
 import domain.ShoppingCart;
+import domain.WebshopFacade;
 import domain.product.Product;
 import domain.product.ShoppingCartProduct;
 
