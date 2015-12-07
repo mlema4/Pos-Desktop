@@ -38,22 +38,22 @@ public class CashierUI extends JFrame implements Observer {
 		// set params for frame
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(800, 500);
-		
+
 		// creating panels
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 3, 3));
 		JPanel itemsPanel = new JPanel();
 
-		//creating table components
-		String[] columns = { "Id", "Name", "Price", "Qty", "Total"};
+		// creating table components
+		String[] columns = { "Id", "Name", "Price", "Qty", "Total" };
 		itemsModel = new PosTableModel(columns);
-		//creating table and scrollPane
+		// creating table and scrollPane
 		JTable items = new JTable(null, columns);
 		items.setModel(itemsModel);
 		JScrollPane pane = new JScrollPane(items);
 		itemsModel.addTableModelListener(new PosTableModelListener(cartId, controller));
-		
-		//creating labels, buttons and text fields
+
+		// creating labels, buttons and text fields
 		JLabel lblQty = new JLabel("Qty");
 		JLabel lblItemId = new JLabel("Product id");
 		JLabel lblAmount = new JLabel("Amount");
@@ -69,7 +69,7 @@ public class CashierUI extends JFrame implements Observer {
 		txtDiscount = new JTextField(5);
 		txtDiscountApplied = new JTextField(5);
 		txtDiscountApplied.setEnabled(false);
-		
+
 		// building frame
 		// add stuff to itemspanel
 		itemsPanel.add(lblItemId);
@@ -105,15 +105,15 @@ public class CashierUI extends JFrame implements Observer {
 				try {
 					productId = Integer.parseInt(txtItemId.getText());
 				} catch (NumberFormatException exc1) {
-					JOptionPane.showMessageDialog(null, txtItemId.getText()
-							+ " couldn't be parsed.\nPlease input a valid number");
+					JOptionPane.showMessageDialog(null,
+							txtItemId.getText() + " couldn't be parsed.\nPlease input a valid number");
 					smooth = false;
 				}
 				try {
 					qty = Integer.parseInt(txtQty.getText());
 				} catch (NumberFormatException exc1) {
-					JOptionPane.showMessageDialog(null, txtQty.getText()
-							+ " couldn't be parsed.\nPlease input a valid number");
+					JOptionPane.showMessageDialog(null,
+							txtQty.getText() + " couldn't be parsed.\nPlease input a valid number");
 					smooth = false;
 				}
 				try {
@@ -125,7 +125,7 @@ public class CashierUI extends JFrame implements Observer {
 			}
 		};
 	}
-	
+
 	protected ActionListener addDiscountBtnClick() {
 		return new ActionListener() {
 
@@ -152,18 +152,17 @@ public class CashierUI extends JFrame implements Observer {
 		// working with i can lead to weird index errors because it's not always
 		// obvious
 		for (ShoppingCartProduct p : products) {
-			itemsModel.addRow(new Object[] { p.getProduct().getId(),
-					p.getProduct().getName(), p.getProduct().getPrice(),
-					p.getQty(), p.getTotal() });
+			itemsModel.addRow(new Object[] { p.getProduct().getId(), p.getProduct().getName(),
+					p.getProduct().getPrice(), p.getQty(), p.getTotal() });
 		}
 
 		txtAmount.setText(round(controller.getTotalAmountFromCart(cartId)).toString());
-		txtDiscountApplied.setText(controller.getDiscountCode(cartId));
+		txtDiscountApplied.setText(controller.getAppliedDiscountCode(cartId));
 	}
-	
+
 	private Double round(double val) {
 		val *= 100;
 		val = Math.round(val);
-		return val/100;
+		return val / 100;
 	}
 }

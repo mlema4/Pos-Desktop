@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Observer;
 import java.util.Properties;
 
+import db.WebshopFacade;
 import domain.ShoppingCart;
-import domain.WebshopFacade;
 import domain.product.Product;
 import domain.product.ShoppingCartProduct;
 
@@ -58,15 +58,17 @@ public class Controller {
 	public Double getTotalAmountFromCart(int currentCartId) {
 		return getCart(currentCartId).getTotalPrice();
 	}
-	
-	public List<ShoppingCartProduct> getCartProducts(int cartId){
+
+	public List<ShoppingCartProduct> getCartProducts(int cartId) {
 		return getCart(cartId).getProducts();
 	}
 
 	public void initUI() {
 		int cartId = createCart(null);
-		new CashierUI(this, cartId).launch();;
-		new CustomerUI(this, cartId).launch();;
+		new CashierUI(this, cartId).launch();
+		;
+		new CustomerUI(this, cartId).launch();
+		;
 	}
 
 	public void alterQuantity(int cartId, int productIndex, int newQuantity) {
@@ -83,7 +85,8 @@ public class Controller {
 		webshop.addDiscountToCart(cartId, code);
 	}
 
-	public String getDiscountCode(int cartId) {
-		return webshop.getDiscountCode(cartId);
+	public String getAppliedDiscountCode(int cartId) {
+		return webshop.getAppliedDiscountCode(cartId);
 	}
+
 }
