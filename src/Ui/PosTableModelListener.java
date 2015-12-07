@@ -17,11 +17,12 @@ public class PosTableModelListener implements TableModelListener {
 	@Override
 	public void tableChanged(TableModelEvent event) {
 		if (event.getType() == 0) {
-			int productIndex = event.getFirstRow();
+			int rowIndex = event.getFirstRow();
 			PosTableModel model = (PosTableModel) event.getSource();
-			int newQuantity = Integer.parseInt((String)model.getValueAt(productIndex, event.getColumn()));
+			int newQuantity = Integer.parseInt((String)model.getValueAt(rowIndex, event.getColumn()));
+			int productId = Integer.parseInt((String)model.getValueAt(rowIndex, 5));
 			try {
-				controller.alterQuantity(cartId, productIndex, newQuantity);
+				controller.alterQuantity(cartId, productId, newQuantity);
 			} catch (IllegalArgumentException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			} finally {

@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Observer;
 import java.util.Properties;
 
-import domain.ShoppingCart;
 import domain.WebshopFacade;
 import domain.product.Product;
-import domain.product.ShoppingCartProduct;
+import domain.shoppingcart.ShoppingCart;
+import domain.shoppingcartproduct.ShoppingCartProduct;
 
 public class Controller {
 	private WebshopFacade webshop;
@@ -71,9 +71,9 @@ public class Controller {
 		;
 	}
 
-	public void alterQuantity(int cartId, int productIndex, int newQuantity) {
+	public void alterQuantity(int cartId, int productId, int newQuantity) {
 		ShoppingCart cart = getCart(cartId);
-		cart.alterProduct(productIndex, newQuantity);
+		cart.alterProduct(productId, newQuantity);
 	}
 
 	public void updateCart(int cartId) {
