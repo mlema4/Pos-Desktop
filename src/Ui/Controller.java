@@ -67,6 +67,7 @@ public class Controller {
 
 	public void initUI() {
 		int cartId = createCart(null);
+
 		this.cashierUi = new CashierUI(this, cartId);
 		this.costumerUi = new CustomerUI(this, cartId);
 
@@ -80,11 +81,12 @@ public class Controller {
 		webshop.deleteCart(cashierUi.cartId);
 		costumerUi.dispose();
 		cashierUi.dispose();
+
 	}
 
-	public void alterQuantity(int cartId, int productIndex, int newQuantity) {
+	public void alterQuantity(int cartId, int productId, int newQuantity) {
 		ShoppingCart cart = getCart(cartId);
-		cart.alterProduct(productIndex, newQuantity);
+		cart.alterProduct(productId, newQuantity);
 	}
 
 	public void updateCart(int cartId) {
