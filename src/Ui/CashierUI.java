@@ -48,7 +48,7 @@ public class CashierUI extends JFrame implements Observer {
 		JPanel itemsPanel = new JPanel();
 
 		// creating table components
-		String[] columns = { "Id", "Name", "Price", "Qty", "Total" };
+		String[] columns = { "Product ID", "Name", "Price", "Qty", "Total", "purchase ID"};
 		itemsModel = new PosTableModel(columns);
 		// creating table and scrollPane
 		JTable items = new JTable(null, columns);
@@ -159,7 +159,7 @@ public class CashierUI extends JFrame implements Observer {
 		// obvious
 		for (ShoppingCartProduct p : products) {
 			itemsModel.addRow(new Object[] { p.getProduct().getId(), p.getProduct().getName(),
-					p.getProduct().getPrice(), p.getQty(), p.getTotal() });
+					p.getProduct().getPrice(), p.getQty(), p.getTotal(), p.getId()});
 		}
 
 		txtAmount.setText(round(controller.getTotalAmountFromCart(cartId)).toString());
