@@ -66,9 +66,7 @@ public class Controller {
 	public void initUI() {
 		int cartId = createCart(null);
 		new CashierUI(this, cartId).launch();
-		;
 		new CustomerUI(this, cartId).launch();
-		;
 	}
 
 	public void alterQuantity(int cartId, int productId, int newQuantity) {

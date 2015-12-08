@@ -20,7 +20,7 @@ public class PosTableModelListener implements TableModelListener {
 			int rowIndex = event.getFirstRow();
 			PosTableModel model = (PosTableModel) event.getSource();
 			int newQuantity = Integer.parseInt((String)model.getValueAt(rowIndex, event.getColumn()));
-			int productId = Integer.parseInt((String)model.getValueAt(rowIndex, 5));
+			int productId = (Integer)model.getValueAt(rowIndex, 5);
 			try {
 				controller.alterQuantity(cartId, productId, newQuantity);
 			} catch (IllegalArgumentException e) {
