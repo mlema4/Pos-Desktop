@@ -3,6 +3,8 @@ package Ui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,7 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import domain.product.ShoppingCartProduct;
+import domain.shoppingcartproduct.ShoppingCartProduct;
 
 public class CashierUI extends JFrame implements Observer {
 
@@ -37,6 +39,7 @@ public class CashierUI extends JFrame implements Observer {
 	protected void initComponents() {
 		// set params for frame
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 		this.setSize(800, 500);
 
 		// creating panels
@@ -88,6 +91,9 @@ public class CashierUI extends JFrame implements Observer {
 		panel.add(itemsPanel, 1);
 		// and add it to the frame
 		this.add(panel);
+
+		this.addWindowListener(new CashierUiWindowListener(controller));
+
 	}
 
 	public void launch() {

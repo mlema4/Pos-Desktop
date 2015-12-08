@@ -6,13 +6,15 @@ import java.util.List;
 import java.util.Observer;
 import java.util.Properties;
 
-import db.WebshopFacade;
-import domain.ShoppingCart;
+import domain.WebshopFacade;
 import domain.product.Product;
-import domain.product.ShoppingCartProduct;
+import domain.shoppingcart.ShoppingCart;
+import domain.shoppingcartproduct.ShoppingCartProduct;
 
 public class Controller {
 	private WebshopFacade webshop;
+	CashierUI cashierUi;
+	CustomerUI costumerUi;
 
 	public Controller() {
 		WebshopFacade webshop = new WebshopFacade(this.getProperties());
@@ -65,10 +67,19 @@ public class Controller {
 
 	public void initUI() {
 		int cartId = createCart(null);
-		new CashierUI(this, cartId).launch();
-		;
-		new CustomerUI(this, cartId).launch();
-		;
+		this.cashierUi = new CashierUI(this, cartId);
+		this.costumerUi = new CustomerUI(this, cartId);
+
+		this.cashierUi.launch();
+		this.costumerUi.launch();
+
+	}
+
+
+	public void shutDown() {
+		webshop.deleteCart(cashierUi.cartId);
+		costumerUi.dispose();
+		cashierUi.dispose();
 	}
 
 	public void alterQuantity(int cartId, int productIndex, int newQuantity) {
@@ -86,7 +97,7 @@ public class Controller {
 	}
 
 	public String getAppliedDiscountCode(int cartId) {
-		return webshop.getAppliedDiscountCode(cartId);
+		return webshop.getDiscountCode(cartId);
 	}
 
 }
