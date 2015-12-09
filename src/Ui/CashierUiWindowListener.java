@@ -3,6 +3,11 @@ package Ui;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+/**
+ * 
+ * @author Vijay Sapkota
+ *
+ */
 public class CashierUiWindowListener implements WindowListener {
 	Controller controller;
 

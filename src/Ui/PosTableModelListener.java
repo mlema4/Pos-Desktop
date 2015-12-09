@@ -4,6 +4,11 @@ import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+/**
+ * 
+ * @author Milan Sanders
+ *
+ */
 public class PosTableModelListener implements TableModelListener {
 	
 	private final int cartId;

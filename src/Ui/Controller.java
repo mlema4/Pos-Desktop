@@ -11,6 +11,11 @@ import domain.product.Product;
 import domain.shoppingcart.ShoppingCart;
 import domain.shoppingcartproduct.ShoppingCartProduct;
 
+/**
+ * 
+ * @author Milan Sanders
+ *
+ */
 public class Controller {
 	private WebshopFacade webshop;
 	CashierUI cashierUi;

@@ -21,6 +21,11 @@ import javax.swing.table.DefaultTableModel;
 
 import domain.shoppingcartproduct.ShoppingCartProduct;
 
+/**
+ * 
+ * @author Vijay Sapkota
+ *
+ */
 public class CashierUI extends JFrame implements Observer {
 
 	public CashierUI(Controller controller, int cartId) {

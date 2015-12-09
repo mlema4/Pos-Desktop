@@ -8,6 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * 
+ * @author Milan Sanders
+ *
+ */
 public class CustomerUI extends JFrame implements Observer {
 
 	JTextField txtAmount;

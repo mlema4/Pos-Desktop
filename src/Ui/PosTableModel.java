@@ -1,7 +1,11 @@
 package Ui;
 
 import javax.swing.table.DefaultTableModel;
-
+/**
+ * 
+ * @author Milan Sanders
+ *
+ */
 public class PosTableModel extends DefaultTableModel {
 
 	public PosTableModel(String[] columns) {
