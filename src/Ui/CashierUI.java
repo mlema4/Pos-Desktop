@@ -53,7 +53,7 @@ public class CashierUI extends JFrame implements Observer {
 		JPanel itemsPanel = new JPanel();
 
 		// creating table components
-		String[] columns = { "Product ID", "Name", "Price", "Qty", "Total", "purchase ID"};
+		String[] columns = { "Product ID", "Name", "Price", "Qty", "Total", "purchase ID" };
 		itemsModel = new PosTableModel(columns);
 		// creating table and scrollPane
 		JTable items = new JTable(null, columns);
@@ -70,6 +70,9 @@ public class CashierUI extends JFrame implements Observer {
 		btnAddProduct.addActionListener(this.addToCartBtnClick());
 		JButton btnAddDiscount = new JButton("Add discount");
 		btnAddDiscount.addActionListener(this.addDiscountBtnClick());
+		JButton btnEndSale = new JButton("End sale");
+		btnEndSale.addActionListener(this.addEndSaleBtnClick());
+
 		txtItemId = new JTextField(5);
 		txtQty = new JTextField(5);
 		txtAmount = new JTextField(5);
@@ -91,6 +94,7 @@ public class CashierUI extends JFrame implements Observer {
 		itemsPanel.add(txtDiscount);
 		itemsPanel.add(btnAddDiscount);
 		itemsPanel.add(txtDiscountApplied);
+		itemsPanel.add(btnEndSale);
 		// populating main JPanel
 		panel.add(pane, 0);
 		panel.add(itemsPanel, 1);
@@ -152,6 +156,16 @@ public class CashierUI extends JFrame implements Observer {
 		};
 	}
 
+	private ActionListener addEndSaleBtnClick() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.endSale(cartId);
+			}
+		};
+	}
+
 	@Override
 	public void update(Observable o, Object arg) {
 		List<ShoppingCartProduct> products = controller.getCartProducts(cartId);
@@ -164,7 +178,7 @@ public class CashierUI extends JFrame implements Observer {
 		// obvious
 		for (ShoppingCartProduct p : products) {
 			itemsModel.addRow(new Object[] { p.getProduct().getId(), p.getProduct().getName(),
-					p.getProduct().getPrice(), p.getQty(), p.getTotal(), p.getId()});
+					p.getProduct().getPrice(), p.getQty(), p.getTotal(), p.getId() });
 		}
 
 		txtAmount.setText(round(controller.getTotalAmountFromCart(cartId)).toString());
