@@ -9,8 +9,6 @@ import java.util.Properties;
 import javax.swing.JOptionPane;
 
 import domain.WebshopFacade;
-import domain.product.Product;
-import domain.shoppingcart.ShoppingCart;
 import domain.shoppingcartproduct.ShoppingCartProduct;
 
 /**
@@ -40,36 +38,24 @@ public class Controller {
 		return properties;
 	}
 
-	private ShoppingCart getCart(int cartId) {
-		return this.webshop.getCart(cartId);
-	}
-
 	public int createCart(String userId) {
 		return webshop.createCart(userId).getId();
 	}
 
-	public Product getProduct(int productId) {
-		return webshop.getProduct(productId);
-	}
-
 	public void addProductToCart(int currentCartId, int productId, int qty) {
-		Product p = getProduct(productId);
-		if (p == null) {
-			throw new IllegalArgumentException("Product not found");
-		}
-		webshop.addProductToCart(currentCartId, p, qty);
+		webshop.addProductToCart(currentCartId, productId, qty);
 	}
 
-	public void addCartObserver(int currentCartId, Observer cartUi) {
-		getCart(currentCartId).addObserver(cartUi);
+	public void addCartObserver(int cartId, Observer cartUi) {
+		webshop.addCartObserver(cartId, cartUi);
 	}
 
-	public Double getTotalAmountFromCart(int currentCartId) {
-		return getCart(currentCartId).getTotalPrice();
+	public Double getTotalAmountFromCart(int cartId) {
+		return webshop.getTotalFromCart(cartId);
 	}
 
 	public List<ShoppingCartProduct> getCartProducts(int cartId) {
-		return getCart(cartId).getProducts();
+		return webshop.getProductsFromCart(cartId);
 	}
 
 	public void initUI() {
@@ -80,24 +66,20 @@ public class Controller {
 
 		this.cashierUi.launch();
 		this.costumerUi.launch();
-
 	}
 
 	public void shutDown() {
 		webshop.deleteCart(cashierUi.cartId);
 		costumerUi.dispose();
 		cashierUi.dispose();
-
 	}
 
 	public void alterQuantity(int cartId, int productId, int newQuantity) {
-		ShoppingCart cart = getCart(cartId);
-		cart.alterProduct(productId, newQuantity);
+		webshop.alterProductInCart(cartId, productId, newQuantity);
 	}
 
 	public void updateCart(int cartId) {
-		ShoppingCart cart = getCart(cartId);
-		cart.reportChanges();
+		webshop.reportChangesInCart(cartId);
 	}
 
 	public void addDiscount(int cartId, String code) {
@@ -138,7 +120,7 @@ public class Controller {
 				paid = Double.parseDouble(amt);
 				success = true;
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Please input a valid number");
+				JOptionPane.showMessageDialog(null, "Please give a valid number");
 			}
 		}
 		return paid;

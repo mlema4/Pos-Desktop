@@ -3,8 +3,6 @@ package Ui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -121,14 +119,14 @@ public class CashierUI extends JFrame implements Observer {
 					productId = Integer.parseInt(txtItemId.getText());
 				} catch (NumberFormatException exc1) {
 					JOptionPane.showMessageDialog(null,
-							txtItemId.getText() + " couldn't be parsed.\nPlease input a valid number");
+							txtItemId.getText() + " is not a number.\nPlease input a valid one");
 					smooth = false;
 				}
 				try {
 					qty = Integer.parseInt(txtQty.getText());
 				} catch (NumberFormatException exc1) {
 					JOptionPane.showMessageDialog(null,
-							txtQty.getText() + " couldn't be parsed.\nPlease input a valid number");
+							txtQty.getText() + " is not a number.\nPlease input a valid one");
 					smooth = false;
 				}
 				try {
