@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 /**
  * 
- * @author Milan Sanders
+ * @author Milan Sanders, Vijay Sapkota
  *
  */
 public class CustomerUI extends JFrame implements Observer {

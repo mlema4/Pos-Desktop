@@ -13,7 +13,7 @@ import domain.shoppingcartproduct.ShoppingCartProduct;
 
 /**
  * 
- * @author Milan Sanders
+ * @author Milan Sanders, Vijay Sapkota
  *
  */
 public class Controller {

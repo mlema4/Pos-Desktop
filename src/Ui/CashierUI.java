@@ -21,7 +21,7 @@ import domain.shoppingcartproduct.ShoppingCartProduct;
 
 /**
  * 
- * @author Vijay Sapkota
+ * @author Vijay Sapkota, Milan Sanders
  *
  */
 public class CashierUI extends JFrame implements Observer {
